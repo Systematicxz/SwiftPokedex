@@ -9,9 +9,12 @@ import UIKit
 
 class PokemonListViewController: UIViewController, PokemonManagerDelegate {
     func showListPokemon(list: [Pokemon]) {
-        
+        self.pokemonList = list
+        DispatchQueue.main.async {
+            self.pokemonTable.reloadData()
+        }
     }
-    
+    var pokemonList: [Pokemon] = []
     var pokemonManager = PokemonManager()
 
     override func viewDidLoad() {
@@ -30,7 +33,7 @@ class PokemonListViewController: UIViewController, PokemonManagerDelegate {
 
 extension PokemonListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return pokemonList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,9 +41,7 @@ extension PokemonListViewController: UITableViewDelegate, UITableViewDataSource 
             withIdentifier: "cell",
             for: indexPath
         )
-        cell.textLabel?.text = "Example"
+        cell.textLabel?.text = pokemonList[indexPath.row].name
         return cell
     }
-    
-    
 }
