@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D1357482B12ACB00067CC33 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1357472B12ACB00067CC33 /* Extensions.swift */; };
+		7D2312962B11CB6600BBDC0A /* pokemonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2312952B11CB6600BBDC0A /* pokemonDetailViewController.swift */; };
 		7DE713742B0311E000213C07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE713732B0311E000213C07 /* AppDelegate.swift */; };
 		7DE713762B0311E000213C07 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE713752B0311E000213C07 /* SceneDelegate.swift */; };
 		7DE713782B0311E000213C07 /* PokemonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE713772B0311E000213C07 /* PokemonListViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D1357472B12ACB00067CC33 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		7D2312952B11CB6600BBDC0A /* pokemonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokemonDetailViewController.swift; sourceTree = "<group>"; };
 		7DE713702B0311E000213C07 /* Pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE713732B0311E000213C07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7DE713752B0311E000213C07 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +64,7 @@
 		7DE713722B0311E000213C07 /* Pokedex */ = {
 			isa = PBXGroup;
 			children = (
+				7D1357472B12ACB00067CC33 /* Extensions.swift */,
 				7DE713732B0311E000213C07 /* AppDelegate.swift */,
 				7DE713752B0311E000213C07 /* SceneDelegate.swift */,
 				7DE713772B0311E000213C07 /* PokemonListViewController.swift */,
@@ -69,6 +74,7 @@
 				7DE713812B0311E200213C07 /* Info.plist */,
 				7DE713872B03180700213C07 /* pokemonManager.swift */,
 				7DE713892B0318A900213C07 /* pokemonData.swift */,
+				7D2312952B11CB6600BBDC0A /* pokemonDetailViewController.swift */,
 			);
 			path = Pokedex;
 			sourceTree = "<group>";
@@ -149,6 +155,8 @@
 				7DE713762B0311E000213C07 /* SceneDelegate.swift in Sources */,
 				7DE7138A2B0318A900213C07 /* pokemonData.swift in Sources */,
 				7DE713882B03180700213C07 /* pokemonManager.swift in Sources */,
+				7D2312962B11CB6600BBDC0A /* pokemonDetailViewController.swift in Sources */,
+				7D1357482B12ACB00067CC33 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

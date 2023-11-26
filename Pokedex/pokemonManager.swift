@@ -26,7 +26,7 @@ struct PokemonManager {
                 }
                 if let secureData = data?.parseData(removeString: "null,") {
                     if let listPokemon = self.parseJSON(dataPokemon: secureData) {
-                        print("List: ", listPokemon)
+                        delegate?.showListPokemon(list: listPokemon)
                     }
                 }
             }

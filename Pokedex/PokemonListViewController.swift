@@ -7,43 +7,41 @@
 
 import UIKit
 
-class PokemonListViewController: UIViewController {
-
-    var pokemonManager = PokemonManager()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupView()
+class PokemonListViewController: UIViewController, PokemonManagerDelegate {
+    func showListPokemon(list: [Pokemon]) {
+        self.pokemonList = list
+        DispatchQueue.main.async { [weak self] in
+            self?.pokemonFilter = self!.pokemonList
+            self?.pokemonTable.reloadData()
+        }
     }
     
-    // MARK: - IBOutlets
+    var pokemonList: [Pokemon] = []
+    var pokemonManager = PokemonManager()
+    var pokemonFilter: [Pokemon] = []
+    var pokemonSelected: Pokemon?
 
-    @IBOutlet weak var pokemonTable: UITableView!
-    @IBOutlet weak var searchBarPokemon: UISearchBar!
-
-    private func setupView() {
+    
+    
+    override func viewDidLoad() {
+        view.backgroundColor = .systemBackground
+        super.viewDidLoad()
         pokemonManager.delegate = self
         pokemonTable.delegate = self
         pokemonTable.dataSource = self
+        searchBarPokemon.delegate = self
         pokemonManager.showPokemon()
     }
+    
+    // IBOutlets
+
+    @IBOutlet weak var pokemonTable: UITableView!
+    @IBOutlet weak var searchBarPokemon: UISearchBar!
 }
 
-// MARK: - PokemonManagerDelegate
-
-extension PokemonListViewController: PokemonManagerDelegate {
-
-    func showListPokemon(list: [Pokemon]) {
-        
-    }
-}
-
-// MARK: - UITableViewDelegate
-
-extension PokemonListViewController: UITableViewDelegate {
-
+extension PokemonListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return pokemonFilter.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,13 +49,34 @@ extension PokemonListViewController: UITableViewDelegate {
             withIdentifier: "cell",
             for: indexPath
         )
-        cell.textLabel?.text = "Example"
+        //cell.textLabel?.textAlignment = .center
+        cell.textLabel?.text = pokemonFilter[indexPath.row].name
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailPokemon = pokemonDetailViewController()
+        detailPokemon.pokemonToShow = pokemonFilter[indexPath.row]
+        navigationController?.pushViewController(detailPokemon, animated: true)
+        
+        pokemonTable.deselectRow(at: indexPath, animated: true)
+    }    
 }
 
-// MARK: - UITableViewDataSource
+extension PokemonListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        pokemonFilter = []
+        if searchText == "" {
+            pokemonFilter = pokemonList
+        } else {
+                for pokemon in pokemonList {
+                    if pokemon.name.lowercased().contains(searchText.lowercased()) {
+                        pokemonFilter.append(pokemon)
+                    }
+                }
+            }
+        self.pokemonTable.reloadData()
+        }
+    }
 
-extension PokemonListViewController: UITableViewDataSource {
-    
-}
+
