@@ -10,27 +10,27 @@ import UIKit
 class PokemonListViewController: UIViewController, PokemonManagerDelegate {
     func showListPokemon(list: [Pokemon]) {
         self.pokemonList = list
-        DispatchQueue.main.async {
-            self.pokemonFilter = self.pokemonList
-            self.pokemonTable.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.pokemonFilter = self!.pokemonList
+            self?.pokemonTable.reloadData()
         }
     }
     
     var pokemonList: [Pokemon] = []
     var pokemonManager = PokemonManager()
-    
     var pokemonFilter: [Pokemon] = []
+    var pokemonSelected: Pokemon?
 
     
     
     override func viewDidLoad() {
+        view.backgroundColor = .systemBackground
         super.viewDidLoad()
         pokemonManager.delegate = self
         pokemonTable.delegate = self
         pokemonTable.dataSource = self
         searchBarPokemon.delegate = self
         pokemonManager.showPokemon()
-        pokemonFilter = pokemonList
     }
     
     // IBOutlets
@@ -52,6 +52,13 @@ extension PokemonListViewController: UITableViewDelegate, UITableViewDataSource 
         cell.textLabel?.text = pokemonFilter[indexPath.row].name
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailPokemon = pokemonDetailViewController()
+        detailPokemon.pokemonToShow = pokemonFilter[indexPath.row]
+        navigationController?.pushViewController(detailPokemon, animated: true)
+        
+        pokemonTable.deselectRow(at: indexPath, animated: true)
+    }    
 }
 
 extension PokemonListViewController: UISearchBarDelegate {
@@ -70,3 +77,5 @@ extension PokemonListViewController: UISearchBarDelegate {
         self.pokemonTable.reloadData()
         }
     }
+
+
