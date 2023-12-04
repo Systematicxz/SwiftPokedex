@@ -49,6 +49,7 @@ extension PokemonListViewController: UITableViewDelegate, UITableViewDataSource 
             withIdentifier: "cell",
             for: indexPath
         )
+        cell.textLabel?.textAlignment = .center
         cell.textLabel?.text = pokemonFilter[indexPath.row].name
         return cell
     }

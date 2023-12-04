@@ -17,6 +17,10 @@
 		7DE713802B0311E200213C07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DE7137E2B0311E200213C07 /* LaunchScreen.storyboard */; };
 		7DE713882B03180700213C07 /* pokemonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE713872B03180700213C07 /* pokemonManager.swift */; };
 		7DE7138A2B0318A900213C07 /* pokemonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE713892B0318A900213C07 /* pokemonData.swift */; };
+		7DEADCA72B1945F100BCD590 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEADCA62B1945F100BCD590 /* ImageTableViewCell.swift */; };
+		7DEADCA92B1978A200BCD590 /* StatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEADCA82B1978A200BCD590 /* StatsTableViewCell.swift */; };
+		7DEADCAB2B197E4700BCD590 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEADCAA2B197E4700BCD590 /* TypeTableViewCell.swift */; };
+		7DEADCAD2B19804900BCD590 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEADCAC2B19804900BCD590 /* DescriptionTableViewCell.swift */; };
 		D901737E2B167B0F00E1838F /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D901737D2B167B0F00E1838F /* TitleTableViewCell.swift */; };
 		D90173802B167D7C00E1838F /* PokemonDetailSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D901737F2B167D7C00E1838F /* PokemonDetailSection.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +38,10 @@
 		7DE713812B0311E200213C07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7DE713872B03180700213C07 /* pokemonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokemonManager.swift; sourceTree = "<group>"; };
 		7DE713892B0318A900213C07 /* pokemonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokemonData.swift; sourceTree = "<group>"; };
+		7DEADCA62B1945F100BCD590 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		7DEADCA82B1978A200BCD590 /* StatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTableViewCell.swift; sourceTree = "<group>"; };
+		7DEADCAA2B197E4700BCD590 /* TypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeTableViewCell.swift; sourceTree = "<group>"; };
+		7DEADCAC2B19804900BCD590 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		D901737D2B167B0F00E1838F /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		D901737F2B167D7C00E1838F /* PokemonDetailSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +97,10 @@
 			isa = PBXGroup;
 			children = (
 				D901737D2B167B0F00E1838F /* TitleTableViewCell.swift */,
+				7DEADCA62B1945F100BCD590 /* ImageTableViewCell.swift */,
+				7DEADCA82B1978A200BCD590 /* StatsTableViewCell.swift */,
+				7DEADCAA2B197E4700BCD590 /* TypeTableViewCell.swift */,
+				7DEADCAC2B19804900BCD590 /* DescriptionTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -171,6 +183,10 @@
 				7DE713762B0311E000213C07 /* SceneDelegate.swift in Sources */,
 				7DE7138A2B0318A900213C07 /* pokemonData.swift in Sources */,
 				7DE713882B03180700213C07 /* pokemonManager.swift in Sources */,
+				7DEADCAD2B19804900BCD590 /* DescriptionTableViewCell.swift in Sources */,
+				7DEADCAB2B197E4700BCD590 /* TypeTableViewCell.swift in Sources */,
+				7DEADCA92B1978A200BCD590 /* StatsTableViewCell.swift in Sources */,
+				7DEADCA72B1945F100BCD590 /* ImageTableViewCell.swift in Sources */,
 				7D2312962B11CB6600BBDC0A /* pokemonDetailViewController.swift in Sources */,
 				7D1357482B12ACB00067CC33 /* Extensions.swift in Sources */,
 			);
