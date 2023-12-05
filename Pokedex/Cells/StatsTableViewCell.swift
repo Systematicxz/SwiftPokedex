@@ -16,7 +16,6 @@ class StatsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupViews()
         setupConstraints()
     }
@@ -29,7 +28,6 @@ class StatsTableViewCell: UITableViewCell {
         attackLabel.text = "Attack: \(attack)"
         defenseLabel.text = "Defense: \(defense)"
     }
-
     
     private func setupViews() {
         contentView.addSubview(stackView)
@@ -45,11 +43,6 @@ class StatsTableViewCell: UITableViewCell {
         stackView.addArrangedSubview(attackLabel)
         stackView.addArrangedSubview(UIView())
         stackView.addArrangedSubview(defenseLabel)
-        
-
-        attackLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        defenseLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        
         attackLabel.textAlignment = .right
         defenseLabel.textAlignment = .left
     }
