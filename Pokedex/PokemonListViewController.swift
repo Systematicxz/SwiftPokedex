@@ -8,18 +8,17 @@ import UIKit
 import CoreData
 
 class PokemonListViewController: UIViewController, PokemonManagerDelegate {
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context = AppDelegate().persistentContainer.viewContext
     
     func showListPokemon(list: [Pokemon]) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = AppDelegate().persistentContainer.viewContext
-        
         self.pokemonList = list
         DispatchQueue.main.async { [weak self] in
             self?.pokemonFilter = self!.pokemonList
             self?.pokemonTable.reloadData()
             
             for pokemon in list {
-                let pokemonEntity = PokemonEntity(context: context)
+                let pokemonEntity = PokemonEntity(context: self!.context)
                 pokemonEntity.name = pokemon.name
                 pokemonEntity.id = Int16(pokemon.id)
                 pokemonEntity.attack = Int16(pokemon.attack)
@@ -32,15 +31,15 @@ class PokemonListViewController: UIViewController, PokemonManagerDelegate {
                 } catch  {
                     print("failed to sabe pokemon to Core Data")
                 }
-                
             }
         }
     }
+    
     var pokemonList: [Pokemon] = []
     var pokemonManager = PokemonManager()
     var pokemonFilter: [Pokemon] = []
     var pokemonSelected: Pokemon?
-
+    
     
     
     override func viewDidLoad() {
@@ -54,7 +53,7 @@ class PokemonListViewController: UIViewController, PokemonManagerDelegate {
     }
     
     // IBOutlets
-
+    
     @IBOutlet weak var pokemonTable: UITableView!
     @IBOutlet weak var searchBarPokemon: UISearchBar!
 }
@@ -79,7 +78,7 @@ extension PokemonListViewController: UITableViewDelegate, UITableViewDataSource 
         navigationController?.pushViewController(detailPokemon, animated: true)
         
         pokemonTable.deselectRow(at: indexPath, animated: true)
-    }    
+    }
 }
 
 extension PokemonListViewController: UISearchBarDelegate {
@@ -89,14 +88,14 @@ extension PokemonListViewController: UISearchBarDelegate {
         if searchText == "" {
             pokemonFilter = pokemonList
         } else {
-                for pokemon in pokemonList {
-                    if pokemon.name.lowercased().contains(searchText.lowercased()) {
-                        pokemonFilter.append(pokemon)
-                    }
+            for pokemon in pokemonList {
+                if pokemon.name.lowercased().contains(searchText.lowercased()) {
+                    pokemonFilter.append(pokemon)
                 }
             }
-        self.pokemonTable.reloadData()
         }
+        self.pokemonTable.reloadData()
     }
+}
 
 
