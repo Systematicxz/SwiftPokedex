@@ -4,18 +4,38 @@
 //
 //  Created by PEDRO MENDEZ on 13/11/23.
 //
-
 import UIKit
+import CoreData
 
 class PokemonListViewController: UIViewController, PokemonManagerDelegate {
+    
     func showListPokemon(list: [Pokemon]) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = AppDelegate().persistentContainer.viewContext
+        
         self.pokemonList = list
         DispatchQueue.main.async { [weak self] in
             self?.pokemonFilter = self!.pokemonList
             self?.pokemonTable.reloadData()
+            
+            for pokemon in list {
+                let pokemonEntity = PokemonEntity(context: context)
+                pokemonEntity.name = pokemon.name
+                pokemonEntity.id = Int16(pokemon.id)
+                pokemonEntity.attack = Int16(pokemon.attack)
+                pokemonEntity.defense = Int16(pokemon.defense)
+                pokemonEntity.type = pokemon.type
+                pokemonEntity.imageUrl = pokemon.imageUrl
+                
+                do {
+                    try self?.context.save()
+                } catch  {
+                    print("failed to sabe pokemon to Core Data")
+                }
+                
+            }
         }
     }
-    
     var pokemonList: [Pokemon] = []
     var pokemonManager = PokemonManager()
     var pokemonFilter: [Pokemon] = []
