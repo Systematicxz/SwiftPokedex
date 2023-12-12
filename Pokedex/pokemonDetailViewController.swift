@@ -68,7 +68,6 @@ extension pokemonDetailViewController: UITableViewDataSource {
                 else { fatalError("Not cell found") }
                 if let pokemon = pokemonToShow {
                     cell.configure(imageUrl: pokemon.imageUrl)
-                    print(pokemon.imageUrl)
                 }
                 return cell
                 
