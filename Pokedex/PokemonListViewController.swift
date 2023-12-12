@@ -106,7 +106,8 @@ extension PokemonListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailPokemon = pokemonDetailViewController()
-        detailPokemon.pokemonToShow = pokemonFilter[indexPath.row]
+        let pokemonToShow = pokemonFilter[indexPath.row]
+        detailPokemon.viewModel = PokemonDetailViewModelConcrete(pokemonToShow: pokemonToShow)
         navigationController?.pushViewController(detailPokemon, animated: true)
         
         pokemonTable.deselectRow(at: indexPath, animated: true)
