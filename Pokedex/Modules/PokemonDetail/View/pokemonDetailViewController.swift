@@ -58,43 +58,37 @@ extension pokemonDetailViewController: UITableViewDataSource {
                     let cell = tableView.dequeueReusableCell(withIdentifier: TitleTableViewCell.identifier, for: indexPath) as? TitleTableViewCell
                 else { fatalError("Not cell found") }
                 
-                if let pokemon = pokemonToShow {
-                    cell.configure(title: pokemon.name)
-                }
+                let title = viewModel?.getValueReusable(forSection: .title) as? String ?? ""
+                    cell.configure(title: title)
                 return cell
             case .image:
                 guard let
                         cell = tableView.dequeueReusableCell(withIdentifier: ImageTableViewCell.identifier, for: indexPath) as? ImageTableViewCell
                 else { fatalError("Not cell found") }
-                if let imageURL = viewModel?.getImageURL() {
-                    cell.configure(imageUrl: imageURL)
-                }
+                let imageURL = viewModel?.getValueReusable(forSection: .image) as? String ?? ""
+                cell.configure(imageUrl: imageURL)
                 return cell
                 
             case .info:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: StatsTableViewCell.identifier, for: indexPath) as? StatsTableViewCell
                 else { fatalError("Not cell found") }
-                if let pokemon = pokemonToShow {
-                    cell.configure(attack: pokemon.attack, defense: pokemon.defense)
-                }
+                let infoData = viewModel?.getValueReusable(forSection: .info) as? (attack: Int, defense: Int) ?? (0,0)
+                cell.configure(attack: infoData.attack, defense: infoData.defense)
                 return cell
                 
             case .type:
                 guard
                     let cell = tableView.dequeueReusableCell(withIdentifier: TitleTableViewCell.identifier, for: indexPath) as? TitleTableViewCell
                 else { fatalError("Not cell found") }
-                
-                if let pokemon = pokemonToShow {
-                    cell.configure(title: "Type: \(pokemon.type)")
-                }
+                let type = viewModel?.getValueReusable(forSection: .type) as? String ?? ""
+                cell.configure(title: type)
                 return cell
             case .description:
                 guard
                     let cell = tableView.dequeueReusableCell(withIdentifier: TitleTableViewCell.identifier, for: indexPath) as? TitleTableViewCell
                 else { fatalError("Not cell found") }
-                if let pokemon = pokemonToShow {
-                    cell.configure(title: pokemon.description)
-                }
+                let description = viewModel?.getValueReusable(forSection: .description) as? String ?? ""
+                cell.configure(title: description)
                 return cell
             }
         } else {
