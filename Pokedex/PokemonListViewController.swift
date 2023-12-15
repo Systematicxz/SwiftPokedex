@@ -29,11 +29,42 @@ class PokemonListViewController: UIViewController, PokemonManagerDelegate {
                 do {
                     try self?.context.save()
                 } catch  {
-                    print("failed to sabe pokemon to Core Data")
+                    print("failed to save pokemon to Core Data")
                 }
             }
         }
     }
+    func checkCoreDataForPokemonList() {
+           let request: NSFetchRequest<PokemonEntity> = PokemonEntity.fetchRequest()
+           
+           do {
+               let pokemonEntities = try context.fetch(request)
+               if !pokemonEntities.isEmpty {
+                   var pokemonListFromCoreData: [Pokemon] = []
+                   
+                   for pokemonEntity in pokemonEntities {
+                       let pokemon = Pokemon(
+                        id: Int(pokemonEntity.id),
+                        attack: Int(pokemonEntity.attack),
+                        name: String(pokemonEntity.name ?? ""),
+                        type: String(pokemonEntity.type ?? ""),
+                        defense: Int(pokemonEntity.defense),
+                        description: String(pokemonEntity.description),
+                        imageUrl: pokemonEntity.imageUrl ?? "" 
+                       )
+                       pokemonListFromCoreData.append(pokemon)
+                   }
+                   
+                   self.pokemonList = pokemonListFromCoreData
+                   self.pokemonFilter = pokemonListFromCoreData
+                   self.pokemonTable.reloadData()
+               } else {
+                   pokemonManager.showPokemon()
+               }
+           } catch {
+               print("Error fetching data from Core Data: \(error)")
+           }
+       }
     
     var pokemonList: [Pokemon] = []
     var pokemonManager = PokemonManager()
@@ -45,6 +76,7 @@ class PokemonListViewController: UIViewController, PokemonManagerDelegate {
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
         super.viewDidLoad()
+        checkCoreDataForPokemonList()
         pokemonManager.delegate = self
         pokemonTable.delegate = self
         pokemonTable.dataSource = self
@@ -74,7 +106,8 @@ extension PokemonListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailPokemon = pokemonDetailViewController()
-        detailPokemon.pokemonToShow = pokemonFilter[indexPath.row]
+        let pokemonToShow = pokemonFilter[indexPath.row]
+        detailPokemon.viewModel = PokemonDetailViewModelConcrete(pokemonToShow: pokemonToShow)
         navigationController?.pushViewController(detailPokemon, animated: true)
         
         pokemonTable.deselectRow(at: indexPath, animated: true)

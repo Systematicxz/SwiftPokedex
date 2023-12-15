@@ -8,8 +8,8 @@
 import UIKit
 
 class pokemonDetailViewController: UIViewController, UITableViewDelegate {
-    var pokemonToShow: Pokemon?
     var tableView = UITableView()
+    var viewModel: PokemonDetailViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,7 @@ class pokemonDetailViewController: UIViewController, UITableViewDelegate {
 extension pokemonDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        PokemonDetailSection.allCases.count
+        viewModel?.getNumberOfRows() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,9 +66,8 @@ extension pokemonDetailViewController: UITableViewDataSource {
                 guard let
                         cell = tableView.dequeueReusableCell(withIdentifier: ImageTableViewCell.identifier, for: indexPath) as? ImageTableViewCell
                 else { fatalError("Not cell found") }
-                if let pokemon = pokemonToShow {
-                    cell.configure(imageUrl: pokemon.imageUrl)
-                    print(pokemon.imageUrl)
+                if let imageURL = viewModel?.getImageURL() {
+                    cell.configure(imageUrl: imageURL)
                 }
                 return cell
                 
