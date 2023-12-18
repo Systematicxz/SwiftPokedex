@@ -7,12 +7,15 @@
 
 import Foundation
 
+
 protocol PokemonManagerDelegate {
     func showListPokemon(list: [Pokemon])
 }
 
 struct PokemonManager {
     var delegate: PokemonManagerDelegate?
+    var viewModel: PokemonListViewModel?
+
     
     func showPokemon() {
         let urlString = "https://pokedex-bb36f.firebaseio.com/pokemon.json"
