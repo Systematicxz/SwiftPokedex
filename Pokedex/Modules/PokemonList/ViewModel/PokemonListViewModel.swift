@@ -80,7 +80,7 @@ class PokemonListViewModelConcrete: PokemonListViewModel {
     var pokemonFilter: [Pokemon] = []
     var pokemonSelected: Pokemon?
     weak var delegate: PokemonListViewModelDelegate?
-    private var pokemonManager = PokemonManager()
+    private let pokemonManager = PokemonManager.shared
     
     func showPokemonDetail(at index: Int) -> PokemonDetailViewModelConcrete {
         let pokemonToShow = pokemonFilter[index]

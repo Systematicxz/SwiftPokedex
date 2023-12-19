@@ -12,10 +12,13 @@ protocol PokemonManagerDelegate {
     func showListPokemon(list: [Pokemon])
 }
 
-struct PokemonManager {
+class PokemonManager {
+    static let shared = PokemonManager()
+    
     var delegate: PokemonManagerDelegate?
     var viewModel: PokemonListViewModel?
-
+    
+    private init() {}
     
     func showPokemon() {
         let urlString = "https://pokedex-bb36f.firebaseio.com/pokemon.json"
@@ -29,7 +32,7 @@ struct PokemonManager {
                 }
                 if let secureData = data?.parseData(removeString: "null,") {
                     if let listPokemon = self.parseJSON(dataPokemon: secureData) {
-                        delegate?.showListPokemon(list: listPokemon)
+                        self.delegate?.showListPokemon(list: listPokemon)
                     }
                 }
             }
